@@ -2,6 +2,8 @@
 
 A responsive full-stack AI-powered education platform designed for desktop and mobile, featuring multilingual support, voice-enabled interactions, and intelligent learning tools.
 
+###Home Page
+![Home Page](teacherx/img/TeacherX1)
 ## ✨ Features
 
 ### 🧠 AI-Powered Learning
