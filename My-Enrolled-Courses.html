@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Courses - TeacherX</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4A90E2',secondary:'#67C587'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #F8F9FA;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.switch-input {
+height: 0;
+width: 0;
+visibility: hidden;
+position: absolute;
+}
+.switch-label {
+display: flex;
+align-items: center;
+justify-content: space-between;
+cursor: pointer;
+width: 50px;
+height: 26px;
+background: #e0e0e0;
+border-radius: 100px;
+position: relative;
+transition: background-color 0.2s;
+}
+.switch-label:after {
+content: "";
+position: absolute;
+top: 3px;
+left: 3px;
+width: 20px;
+height: 20px;
+background: #fff;
+border-radius: 50%;
+transition: 0.2s;
+}
+.switch-input:checked + .switch-label {
+background: #4A90E2;
+}
+.switch-input:checked + .switch-label:after {
+left: calc(100% - 3px);
+transform: translateX(-100%);
+}
+.custom-checkbox {
+position: relative;
+padding-left: 30px;
+cursor: pointer;
+user-select: none;
+}
+.custom-checkbox input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+height: 0;
+width: 0;
+}
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+background-color: #eee;
+border-radius: 4px;
+}
+.custom-checkbox:hover input ~ .checkmark {
+background-color: #ccc;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: #4A90E2;
+}
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-checkbox .checkmark:after {
+left: 7px;
+top: 3px;
+width: 6px;
+height: 11px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.category-scroll::-webkit-scrollbar {
+height: 4px;
+}
+.category-scroll::-webkit-scrollbar-track {
+background: #f1f1f1;
+border-radius: 10px;
+}
+.category-scroll::-webkit-scrollbar-thumb {
+background: #d1d5db;
+border-radius: 10px;
+}
+.category-scroll::-webkit-scrollbar-thumb:hover {
+background: #9ca3af;
+}
+</style>
+</head>
+<body>
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden md:flex md:flex-col w-64 bg-white shadow-lg">
+<div class="p-4 flex items-center justify-center border-b">
+<span class="font-['Pacifico'] text-2xl text-primary">TeacherX</span>
+</div>
+<div class="flex flex-col p-4 flex-grow overflow-y-auto">
+<div class="mb-8">
+<div class="flex flex-col items-center mb-6">
+<div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="font-semibold text-gray-800">Emily Johnson</h3>
+<p class="text-sm text-gray-500">Student</p>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Overall Progress</span>
+<span class="text-sm font-medium text-primary">78%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-primary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<nav>
+<ul class="space-y-2">
+<li>
+<a href="AI-Teacher-Interface-Design (1).html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-dashboard-line ri-lg"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="#" class="flex items-center px-4 py-3 text-gray-800 bg-blue-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
+<i class="ri-book-open-line ri-lg"></i>
+</div>
+<span>My Courses</span>
+</a>
+</li>
+<li>
+<a href="studying.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-play-circle-line ri-lg"></i>
+</div>
+<span>Studying</span>
+</a>
+</li>
+<li>
+<a href="schedule.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-calendar-line ri-lg"></i>
+</div>
+<span>Schedule</span>
+</a>
+</li>
+
+<li>
+<a href="achievements.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-trophy-line ri-lg"></i>
+</div>
+<span>Achievements</span>
+</a>
+</li>
+<li>
+<a href="settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-settings-line ri-lg"></i>
+</div>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto pt-6">
+<div class="bg-blue-50 rounded-lg p-4">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white mr-3">
+<i class="ri-robot-line"></i>
+</div>
+<h4 class="font-medium text-gray-800">AI Tutor</h4>
+</div>
+<p class="text-sm text-gray-600 mb-3">Need help with your studies? Your AI tutor is ready to assist!</p>
+<button class="w-full bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap">
+Ask AI Tutor
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="bg-white shadow-sm z-10">
+<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center">
+<button class="md:hidden mr-4 text-gray-500 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</button>
+<div class="relative md:hidden">
+<span class="font-['Pacifico'] text-xl text-primary">TeacherX</span>
+</div>
+</div>
+<div class="hidden md:flex items-center flex-1 max-w-lg mx-auto">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+<input type="text" class="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary focus:border-primary bg-gray-50 text-gray-700 text-sm" placeholder="Search for courses, topics...">
+</div>
+</div>
+<div class="flex items-center">
+<div class="flex items-center">
+<div class="relative mr-4">
+<button class="relative p-2 text-gray-600 hover:text-gray-800 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-notification-3-line"></i>
+</div>
+<span class="absolute top-0 right-0 h-5 w-5 flex items-center justify-center text-xs text-white bg-red-500 rounded-full">3</span>
+</button>
+</div>
+<div class="relative mr-2">
+<button class="p-2 text-gray-600 hover:text-gray-800 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-moon-line"></i>
+</div>
+</button>
+</div>
+<div class="relative">
+<a href="profile.html" class="flex items-center focus:outline-none">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-gray-50 p-6">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header with Back Button -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+<div class="flex items-center mb-4 md:mb-0">
+<a href="https://readdy.ai/home/eca58778-ca43-479e-b411-a41b97e93b1d/8fed95d2-2955-448b-9e04-66f6ececbbef" data-readdy="true" class="flex items-center text-gray-600 hover:text-primary mr-4">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-left-line"></i>
+</div>
+<span class="ml-1 font-medium">Back to Dashboard</span>
+</a>
+<h1 class="text-2xl font-bold text-gray-800">My Courses</h1>
+</div>
+<div class="flex items-center space-x-3">
+<div class="relative">
+<button id="sort-button" class="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 text-sm font-medium whitespace-nowrap">
+<span>Sort: Recently Added</span>
+<div class="w-5 h-5 flex items-center justify-center ml-2">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</button>
+<div id="sort-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+<div class="py-1">
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recently Added</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Name A-Z</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Progress</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Date Added</a>
+</div>
+</div>
+</div>
+<div class="relative">
+<button id="filter-button" class="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 text-sm font-medium whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-filter-3-line"></i>
+</div>
+<span>Filter</span>
+</button>
+<div id="filter-dropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-10">
+<div class="p-4">
+<h3 class="font-medium text-gray-800 mb-3">Filter Courses</h3>
+<div class="mb-4">
+<label class="block text-sm text-gray-700 mb-2">Instructor</label>
+<select class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white focus:border-primary focus:ring-2 focus:ring-primary text-sm pr-8">
+<option>All Instructors</option>
+<option>Prof. Robert Chen</option>
+<option>Dr. Sarah Williams</option>
+<option>Prof. Michael Johnson</option>
+<option>Dr. Emily Davis</option>
+</select>
+</div>
+<div class="mb-4">
+<label class="block text-sm text-gray-700 mb-2">Date Added</label>
+<select class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white focus:border-primary focus:ring-2 focus:ring-primary text-sm pr-8">
+<option>All Time</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Last 3 Months</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="mb-4">
+<label class="block text-sm text-gray-700 mb-2">Duration</label>
+<select class="w-full border border-gray-300 rounded-md px-3 py-2 bg-white focus:border-primary focus:ring-2 focus:ring-primary text-sm pr-8">
+<option>Any Duration</option>
+<option>Under 2 Hours</option>
+<option>2-5 Hours</option>
+<option>5-10 Hours</option>
+<option>Over 10 Hours</option>
+</select>
+</div>
+<div class="flex justify-between">
+<button class="text-gray-600 text-sm">Reset Filters</button>
+<button class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Search and Filter Bar -->
+<div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+<div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
+<div class="relative flex-grow">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+<input type="text" class="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary focus:border-primary bg-gray-50 text-gray-700 text-sm" placeholder="Search your courses...">
+</div>
+<div class="flex space-x-2">
+<button class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap">
+Search
+</button>
+</div>
+</div>
+</div>
+<!-- Course Status Tabs -->
+<div class="bg-white rounded-lg shadow-sm mb-6 overflow-hidden">
+<div class="flex overflow-x-auto scrollbar-hide">
+<button class="flex-1 py-4 px-6 text-center text-primary font-medium border-b-2 border-primary min-w-[120px] whitespace-nowrap">
+All Courses (8)
+</button>
+<button class="flex-1 py-4 px-6 text-center text-gray-600 font-medium border-b-2 border-transparent hover:text-gray-800 min-w-[120px] whitespace-nowrap">
+In Progress (5)
+</button>
+<button class="flex-1 py-4 px-6 text-center text-gray-600 font-medium border-b-2 border-transparent hover:text-gray-800 min-w-[120px] whitespace-nowrap">
+Completed (2)
+</button>
+<button class="flex-1 py-4 px-6 text-center text-gray-600 font-medium border-b-2 border-transparent hover:text-gray-800 min-w-[120px] whitespace-nowrap">
+Upcoming (1)
+</button>
+</div>
+</div>
+<!-- Course Categories -->
+<div class="mb-6 overflow-x-auto category-scroll">
+<div class="flex space-x-3 pb-2 min-w-max">
+<button class="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">
+All Categories
+</button>
+<button class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap hover:bg-gray-50 border border-gray-200">
+Mathematics (3)
+</button>
+<button class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap hover:bg-gray-50 border border-gray-200">
+Science (2)
+</button>
+<button class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap hover:bg-gray-50 border border-gray-200">
+Programming (2)
+</button>
+<button class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap hover:bg-gray-50 border border-gray-200">
+Languages (1)
+</button>
+<button class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap hover:bg-gray-50 border border-gray-200">
+Business (0)
+</button>
+</div>
+</div>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+<!-- Course Card 1 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=advanced%20mathematics%20concept%20visualization%20with%20equations%2C%20formulas%2C%20and%20geometric%20shapes%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20blue%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=3&orientation=landscape" alt="Advanced Mathematics" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+In Progress
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full mr-3">
+<i class="ri-calculator-line"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Advanced Mathematics</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2 bg-blue-100 flex items-center justify-center">
+<i class="ri-robot-line text-primary text-sm"></i>
+</div>
+<span class="text-sm text-gray-600">AI Tutor</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">65%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-blue-500 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div class="bg-blue-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-blue-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-blue-600">
+<i class="ri-play-circle-line"></i>
+</div>
+<span class="font-medium">Next: Calculus: Differential Equations</span>
+</div>
+<div class="mt-1 text-xs text-blue-700">Today, 09:00 AM • 60 minutes</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Last activity: 2 hours ago
+</div>
+<a href="studying.html" class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap inline-block">
+Continue
+</a>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=modern%20physics%20visualization%20with%20atoms%2C%20particles%2C%20and%20quantum%20concepts%2C%20clean%20educational%20style%2C%20professional%20lighting%2C%20mint%20green%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=4&orientation=landscape" alt="Physics Fundamentals" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+New Lesson
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-green-100 text-green-600 rounded-full mr-3">
+<i class="ri-atom-line"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Physics Fundamentals</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2 bg-green-100 flex items-center justify-center">
+<i class="ri-robot-line text-green-600 text-sm"></i>
+</div>
+<span class="text-sm text-gray-600">AI Tutor</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">42%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-green-500 rounded-full" style="width: 42%"></div>
+</div>
+</div>
+<div class="bg-green-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-green-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-green-600">
+<i class="ri-play-circle-line"></i>
+</div>
+<span class="font-medium">Next: Quantum Mechanics: Wave Functions</span>
+</div>
+<div class="mt-1 text-xs text-green-700">Today, 11:30 AM • 90 minutes</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Last activity: Yesterday
+</div>
+<a href="studying.html" class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap inline-block">
+Continue
+</a>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=computer%20programming%20concept%20with%20code%20on%20screen%2C%20algorithms%2C%20and%20software%20development%20elements%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20orange%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=5&orientation=landscape" alt="Introduction to Programming" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-orange-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+Almost Complete
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-orange-100 text-orange-600 rounded-full mr-3">
+<i class="ri-code-s-slash-line"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Introduction to Programming</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2 bg-orange-100 flex items-center justify-center">
+<i class="ri-robot-line text-orange-600 text-sm"></i>
+</div>
+<span class="text-sm text-gray-600">AI Tutor</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">89%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-orange-500 rounded-full" style="width: 89%"></div>
+</div>
+</div>
+<div class="bg-orange-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-orange-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-orange-600">
+<i class="ri-play-circle-line"></i>
+</div>
+<span class="font-medium">Next: Advanced Algorithms: Graph Theory</span>
+</div>
+<div class="mt-1 text-xs text-orange-700">Today, 02:15 PM • 75 minutes</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Last activity: 3 days ago
+</div>
+<a href="studying.html" class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap inline-block">
+Continue
+</a>
+</div>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=data%20science%20visualization%20with%20charts%2C%20graphs%2C%20and%20statistical%20elements%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20purple%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=13&orientation=landscape" alt="Data Science Fundamentals" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-purple-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+In Progress
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-purple-100 text-purple-600 rounded-full mr-3">
+<i class="ri-bar-chart-box-line"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Data Science Fundamentals</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2 bg-purple-100 flex items-center justify-center">
+<i class="ri-robot-line text-purple-600 text-sm"></i>
+</div>
+<span class="text-sm text-gray-600">AI Tutor</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">35%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-purple-500 rounded-full" style="width: 35%"></div>
+</div>
+</div>
+<div class="bg-purple-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-purple-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-purple-600">
+<i class="ri-play-circle-line"></i>
+</div>
+<span class="font-medium">Next: Statistical Analysis: Regression</span>
+</div>
+<div class="mt-1 text-xs text-purple-700">Tomorrow, 10:00 AM • 90 minutes</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Last activity: 1 week ago
+</div>
+<a href="studying.html" class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap inline-block">
+Continue
+</a>
+</div>
+</div>
+</div>
+<!-- Course Card 5 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=organic%20chemistry%20visualization%20with%20molecular%20structures%2C%20chemical%20bonds%2C%20and%20reaction%20mechanisms%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20teal%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=15&orientation=landscape" alt="Organic Chemistry" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-teal-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+In Progress
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-teal-100 text-teal-600 rounded-full mr-3">
+<i class="ri-flask-line"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Organic Chemistry</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20male%20chemistry%20professor%2C%20academic%20appearance%2C%20lab%20coat%2C%20neutral%20background&width=100&height=100&seq=16&orientation=squarish" alt="Instructor" class="w-full h-full object-cover object-top">
+</div>
+<span class="text-sm text-gray-600">Dr. Thomas Wilson</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">52%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-teal-500 rounded-full" style="width: 52%"></div>
+</div>
+</div>
+<div class="bg-teal-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-teal-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-teal-600">
+<i class="ri-play-circle-line"></i>
+</div>
+<span class="font-medium">Next: Reaction Mechanisms: Nucleophilic Substitution</span>
+</div>
+<div class="mt-1 text-xs text-teal-700">Friday, 01:30 PM • 60 minutes</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Last activity: 5 days ago
+</div>
+<button class="bg-primary text-white px-4 py-2 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap">
+Continue
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 6 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1">
+<div class="h-48 relative">
+<img src="https://readdy.ai/api/search-image?query=spanish%20language%20learning%20visualization%20with%20cultural%20elements%2C%20vocabulary%2C%20and%20conversational%20phrases%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20red%20and%20yellow%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=17&orientation=landscape" alt="Spanish for Beginners" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-gray-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+Completed
+</div>
+</div>
+<div class="p-5">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 text-red-600 rounded-full mr-3">
+<i class="ri-translate-2"></i>
+</div>
+<h3 class="font-semibold text-gray-800">Spanish for Beginners</h3>
+</div>
+<div class="flex items-center mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden mr-2">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20female%20language%20professor%2C%20warm%20smile%2C%20friendly%20expression%2C%20neutral%20background&width=100&height=100&seq=18&orientation=squarish" alt="Instructor" class="w-full h-full object-cover object-top">
+</div>
+<span class="text-sm text-gray-600">Prof. Maria Rodriguez</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-1">
+<span class="text-gray-600">Progress</span>
+<span class="font-medium text-gray-800">100%</span>
+</div>
+<div class="w-full h-2 bg-gray-100 rounded-full">
+<div class="h-2 bg-gray-500 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<div class="bg-gray-50 rounded-md p-3 mb-4">
+<div class="flex items-center text-sm text-gray-800">
+<div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-600">
+<i class="ri-medal-line"></i>
+</div>
+<span class="font-medium">Course completed on June 15, 2025</span>
+</div>
+<div class="mt-1 text-xs text-gray-600">Final grade: A (95%)</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-xs text-gray-500">
+Certificate available
+</div>
+<button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button text-sm font-medium hover:bg-gray-50 transition whitespace-nowrap">
+View Certificate
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Materials Section -->
+<div class="mb-10">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Recent Course Materials</h2>
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="divide-y">
+<div class="flex p-5">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg mr-4 flex-shrink-0">
+<i class="ri-file-text-line ri-lg"></i>
+</div>
+<div class="flex-grow">
+<div class="flex items-center mb-1">
+<h4 class="font-medium text-gray-800">Calculus Handbook</h4>
+<span class="ml-3 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Advanced Mathematics</span>
+</div>
+<p class="text-sm text-gray-600 mb-2">Comprehensive guide to differential and integral calculus</p>
+<div class="flex items-center text-xs text-gray-500">
+<span>PDF • 12.5 MB</span>
+<span class="mx-2">•</span>
+<span>Uploaded 2 days ago</span>
+</div>
+</div>
+<div class="flex-shrink-0 flex items-center">
+<button class="text-gray-500 hover:text-gray-700 p-2">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-download-line"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="flex p-5">
+<div class="w-10 h-10 flex items-center justify-center bg-green-100 text-green-600 rounded-lg mr-4 flex-shrink-0">
+<i class="ri-video-line ri-lg"></i>
+</div>
+<div class="flex-grow">
+<div class="flex items-center mb-1">
+<h4 class="font-medium text-gray-800">Quantum Physics Lecture</h4>
+<span class="ml-3 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Physics Fundamentals</span>
+</div>
+<p class="text-sm text-gray-600 mb-2">Introduction to wave functions and quantum mechanics</p>
+<div class="flex items-center text-xs text-gray-500">
+<span>Video • 45 minutes</span>
+<span class="mx-2">•</span>
+<span>Uploaded 3 days ago</span>
+</div>
+</div>
+<div class="flex-shrink-0 flex items-center">
+<button class="text-gray-500 hover:text-gray-700 p-2">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-play-line"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="flex p-5">
+<div class="w-10 h-10 flex items-center justify-center bg-orange-100 text-orange-600 rounded-lg mr-4 flex-shrink-0">
+<i class="ri-links-line ri-lg"></i>
+</div>
+<div class="flex-grow">
+<div class="flex items-center mb-1">
+<h4 class="font-medium text-gray-800">Programming Resources</h4>
+<span class="ml-3 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Introduction to Programming</span>
+</div>
+<p class="text-sm text-gray-600 mb-2">Collection of helpful links for learning algorithms and data structures</p>
+<div class="flex items-center text-xs text-gray-500">
+<span>Links • 8 resources</span>
+<span class="mx-2">•</span>
+<span>Updated 1 week ago</span>
+</div>
+</div>
+<div class="flex-shrink-0 flex items-center">
+<button class="text-gray-500 hover:text-gray-700 p-2">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-external-link-line"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="flex p-5">
+<div class="w-10 h-10 flex items-center justify-center bg-purple-100 text-purple-600 rounded-lg mr-4 flex-shrink-0">
+<i class="ri-question-answer-line ri-lg"></i>
+</div>
+<div class="flex-grow">
+<div class="flex items-center mb-1">
+<h4 class="font-medium text-gray-800">Practice Problems</h4>
+<span class="ml-3 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Data Science Fundamentals</span>
+</div>
+<p class="text-sm text-gray-600 mb-2">Interactive exercises on statistical analysis and data visualization</p>
+<div class="flex items-center text-xs text-gray-500">
+<span>Interactive • 50 questions</span>
+<span class="mx-2">•</span>
+<span>Due in 3 days</span>
+</div>
+</div>
+<div class="flex-shrink-0 flex items-center">
+<button class="text-gray-500 hover:text-gray-700 p-2">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recommended Courses -->
+<div class="mb-10">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Recommended Based on Your Learning</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Recommended Course 1 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1 border border-gray-100">
+<div class="h-40 relative">
+<img src="https://readdy.ai/api/search-image?query=machine%20learning%20visualization%20with%20neural%20networks%2C%20algorithms%2C%20and%20AI%20concepts%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20blue%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=19&orientation=landscape" alt="Machine Learning Fundamentals" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-indigo-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+Popular
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-center mb-2">
+<div class="w-6 h-6 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-full mr-2">
+<i class="ri-brain-line"></i>
+</div>
+<h3 class="font-medium text-gray-800">Machine Learning Fundamentals</h3>
+</div>
+<div class="flex items-center mb-3">
+<div class="w-5 h-5 rounded-full overflow-hidden mr-2">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20male%20AI%20professor%2C%20tech%20appearance%2C%20neutral%20background&width=100&height=100&seq=20&orientation=squarish" alt="Instructor" class="w-full h-full object-cover object-top">
+</div>
+<span class="text-xs text-gray-600">Dr. James Anderson</span>
+</div>
+<div class="flex items-center text-xs text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1 text-gray-500">
+<i class="ri-time-line"></i>
+</div>
+<span>12 weeks • 36 hours total</span>
+</div>
+<button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-button text-sm font-medium transition whitespace-nowrap">
+Add to My Courses
+</button>
+</div>
+</div>
+<!-- Recommended Course 2 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1 border border-gray-100">
+<div class="h-40 relative">
+<img src="https://readdy.ai/api/search-image?query=advanced%20calculus%20visualization%20with%20complex%20mathematical%20formulas%2C%20graphs%2C%20and%20geometric%20shapes%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20teal%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=21&orientation=landscape" alt="Advanced Calculus" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-teal-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+Recommended
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-center mb-2">
+<div class="w-6 h-6 flex items-center justify-center bg-teal-100 text-teal-600 rounded-full mr-2">
+<i class="ri-functions"></i>
+</div>
+<h3 class="font-medium text-gray-800">Advanced Calculus</h3>
+</div>
+<div class="flex items-center mb-3">
+<div class="w-5 h-5 rounded-full overflow-hidden mr-2">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20female%20mathematics%20professor%2C%20academic%20appearance%2C%20neutral%20background&width=100&height=100&seq=22&orientation=squarish" alt="Instructor" class="w-full h-full object-cover object-top">
+</div>
+<span class="text-xs text-gray-600">Prof. Lisa Chen</span>
+</div>
+<div class="flex items-center text-xs text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1 text-gray-500">
+<i class="ri-time-line"></i>
+</div>
+<span>10 weeks • 30 hours total</span>
+</div>
+<button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-button text-sm font-medium transition whitespace-nowrap">
+Add to My Courses
+</button>
+</div>
+</div>
+<!-- Recommended Course 3 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-transform hover:shadow-md hover:-translate-y-1 border border-gray-100">
+<div class="h-40 relative">
+<img src="https://readdy.ai/api/search-image?query=web%20development%20visualization%20with%20code%2C%20website%20layouts%2C%20and%20responsive%20design%20elements%2C%20clean%20modern%20educational%20style%2C%20professional%20lighting%2C%20purple%20color%20scheme%2C%20high%20quality&width=400&height=200&seq=23&orientation=landscape" alt="Full Stack Web Development" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 right-3 bg-purple-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+New
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-center mb-2">
+<div class="w-6 h-6 flex items-center justify-center bg-purple-100 text-purple-600 rounded-full mr-2">
+<i class="ri-code-box-line"></i>
+</div>
+<h3 class="font-medium text-gray-800">Full Stack Web Development</h3>
+</div>
+<div class="flex items-center mb-3">
+<div class="w-5 h-5 rounded-full overflow-hidden mr-2">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20male%20web%20developer%20instructor%2C%20casual%20tech%20appearance%2C%20neutral%20background&width=100&height=100&seq=24&orientation=squarish" alt="Instructor" class="w-full h-full object-cover object-top">
+</div>
+<span class="text-xs text-gray-600">Alex Thompson</span>
+</div>
+<div class="flex items-center text-xs text-gray-600 mb-3">
+<div class="w-4 h-4 flex items-center justify-center mr-1 text-gray-500">
+<i class="ri-time-line"></i>
+</div>
+<span>14 weeks • 42 hours total</span>
+</div>
+<button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-button text-sm font-medium transition whitespace-nowrap">
+Add to My Courses
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- AI Assistant Button -->
+<div class="fixed bottom-6 right-6 z-50">
+<button id="ai-assistant-btn" class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-600 transition">
+<i class="ri-robot-line ri-lg"></i>
+</button>
+<div id="ai-chat-widget" class="hidden absolute bottom-20 right-0 w-96 bg-white rounded-lg shadow-xl overflow-hidden">
+<div class="p-4 bg-primary">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
+<i class="ri-robot-line text-white ri-lg"></i>
+</div>
+<div>
+<h3 class="text-white font-medium">AI Assistant</h3>
+<p class="text-blue-100 text-sm">Online</p>
+</div>
+</div>
+<button id="close-chat" class="text-white/80 hover:text-white">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+</div>
+<div class="h-96 overflow-y-auto p-4 space-y-4" id="chat-messages">
+<div class="flex items-start">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 flex-shrink-0">
+<i class="ri-robot-line text-primary"></i>
+</div>
+<div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+<p class="text-sm text-gray-800">Hello! I'm your AI tutor. How can I help you with your courses today?</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t">
+<div class="flex items-center space-x-2">
+<input type="text" id="chat-input" class="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-primary" placeholder="Type your question...">
+<button id="send-message" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+<i class="ri-send-plane-line"></i>
+</button>
+</div>
+<div class="flex justify-between mt-2 px-2">
+<button class="text-xs text-gray-500 hover:text-primary flex items-center">
+<i class="ri-mic-line mr-1"></i> Voice
+</button>
+<button class="text-xs text-gray-500 hover:text-primary flex items-center">
+<i class="ri-image-line mr-1"></i> Image
+</button>
+<button class="text-xs text-gray-500 hover:text-primary flex items-center">
+<i class="ri-attachment-line mr-1"></i> File
+</button>
+<button class="text-xs text-gray-500 hover:text-primary flex items-center">
+<i class="ri-emotion-line mr-1"></i> Emoji
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dropdown Controls Script -->
+<script id="dropdown-controls-script">
+document.addEventListener('DOMContentLoaded', function() {
+const sortButton = document.getElementById('sort-button');
+const sortDropdown = document.getElementById('sort-dropdown');
+const filterButton = document.getElementById('filter-button');
+const filterDropdown = document.getElementById('filter-dropdown');
+// Sort dropdown toggle
+sortButton.addEventListener('click', function() {
+sortDropdown.classList.toggle('hidden');
+// Close filter dropdown if open
+if (!filterDropdown.classList.contains('hidden')) {
+filterDropdown.classList.add('hidden');
+}
+});
+// Filter dropdown toggle
+filterButton.addEventListener('click', function() {
+filterDropdown.classList.toggle('hidden');
+// Close sort dropdown if open
+if (!sortDropdown.classList.contains('hidden')) {
+sortDropdown.classList.add('hidden');
+}
+});
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+if (!sortButton.contains(event.target) && !sortDropdown.contains(event.target)) {
+sortDropdown.classList.add('hidden');
+}
+if (!filterButton.contains(event.target) && !filterDropdown.contains(event.target)) {
+filterDropdown.classList.add('hidden');
+}
+});
+// Handle sort option selection
+const sortOptions = sortDropdown.querySelectorAll('a');
+sortOptions.forEach(option => {
+option.addEventListener('click', function(e) {
+e.preventDefault();
+const selectedOption = this.textContent;
+sortButton.querySelector('span').textContent = 'Sort: ' + selectedOption;
+sortDropdown.classList.add('hidden');
+});
+});
+});
+</script>
+<!-- AI Chat Widget Script -->
+<script id="ai-chat-script">
+document.addEventListener('DOMContentLoaded', function() {
+const aiAssistantBtn = document.getElementById('ai-assistant-btn');
+const aiChatWidget = document.getElementById('ai-chat-widget');
+const closeChat = document.getElementById('close-chat');
+const chatInput = document.getElementById('chat-input');
+const sendMessage = document.getElementById('send-message');
+const chatMessages = document.getElementById('chat-messages');
+aiAssistantBtn.addEventListener('click', function() {
+aiChatWidget.classList.toggle('hidden');
+if (!aiChatWidget.classList.contains('hidden')) {
+chatInput.focus();
+}
+});
+closeChat.addEventListener('click', function() {
+aiChatWidget.classList.add('hidden');
+});
+function addMessage(message, isUser = false) {
+const messageDiv = document.createElement('div');
+messageDiv.className = 'flex items-start';
+const iconDiv = document.createElement('div');
+iconDiv.className = `w-8 h-8 rounded-full ${isUser ? 'bg-primary' : 'bg-blue-100'} flex items-center justify-center mr-3 flex-shrink-0`;
+iconDiv.innerHTML = `<i class="${isUser ? 'ri-user-line text-white' : 'ri-robot-line text-primary'}"></i>`;
+const contentDiv = document.createElement('div');
+contentDiv.className = `${isUser ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'} rounded-lg p-3 max-w-[80%]`;
+contentDiv.innerHTML = `<p class="text-sm">${message}</p>`;
+messageDiv.appendChild(iconDiv);
+messageDiv.appendChild(contentDiv);
+chatMessages.appendChild(messageDiv);
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+function handleMessage() {
+const message = chatInput.value.trim();
+if (message) {
+addMessage(message, true);
+chatInput.value = '';
+setTimeout(() => {
+if (message.toLowerCase().includes('course') || message.toLowerCase().includes('class')) {
+addMessage('I can help you with your courses! Would you like information about your current progress, upcoming assignments, or recommendations for additional resources?', false);
+} else {
+addMessage('I understand your question. Let me help you with that. Is there a specific course you\'re asking about?', false);
+}
+}, 1000);
+}
+}
+sendMessage.addEventListener('click', handleMessage);
+chatInput.addEventListener('keypress', function(e) {
+if (e.key === 'Enter') {
+handleMessage();
+}
+});
+});
+</script>
+<!-- Course Tabs Script -->
+<script id="course-tabs-script">
+document.addEventListener('DOMContentLoaded', function() {
+const tabButtons = document.querySelectorAll('.bg-white.rounded-lg.shadow-sm.mb-6.overflow-hidden button');
+tabButtons.forEach(button => {
+button.addEventListener('click', function() {
+// Remove active class from all buttons
+tabButtons.forEach(btn => {
+btn.classList.remove('text-primary', 'border-primary');
+btn.classList.add('text-gray-600', 'border-transparent');
+});
+// Add active class to clicked button
+this.classList.remove('text-gray-600', 'border-transparent');
+this.classList.add('text-primary', 'border-primary');
+});
+});
+});
+</script>
+<!-- Category Filter Script -->
+<script id="category-filter-script">
+document.addEventListener('DOMContentLoaded', function() {
+const categoryButtons = document.querySelectorAll('.category-scroll button');
+categoryButtons.forEach(button => {
+button.addEventListener('click', function() {
+// Skip if it's the "All Categories" button which should stay active
+if (this.textContent.trim() === 'All Categories') return;
+// Toggle active state for this button
+if (this.classList.contains('bg-white')) {
+this.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+this.classList.add('bg-primary', 'text-white');
+} else {
+this.classList.remove('bg-primary', 'text-white');
+this.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+}
+});
+});
+});
+</script>
+</body>
+</html>

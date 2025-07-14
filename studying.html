@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherX - Studying Session</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        .monaco-editor {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        .whiteboard-canvas {
+            cursor: crosshair;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .sidebar-collapsed {
+            width: 4rem;
+        }
+        .sidebar-expanded {
+            width: 20rem;
+        }
+        .bg-primary {
+            background-color: #2563eb;
+        }
+        .text-primary {
+            color: #2563eb;
+        }
+        .border-primary {
+            border-color: #2563eb;
+        }
+        .rounded-button {
+            border-radius: 0.5rem;
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 transition-colors duration-300">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-white shadow-lg transition-all duration-300" id="main-sidebar">
+            <div class="p-4 flex items-center justify-center border-b">
+                <span class="font-['Pacifico'] text-2xl text-primary">TeacherX</span>
+            </div>
+            <div class="flex flex-col p-4 flex-grow overflow-y-auto">
+                <div class="mb-8">
+                    <div class="flex flex-col items-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden mb-3">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+                        </div>
+                        <h3 class="font-semibold text-gray-800">Emily Johnson</h3>
+                        <p class="text-sm text-gray-500">Student</p>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700">Overall Progress</span>
+                            <span class="text-sm font-medium text-primary">78%</span>
+                        </div>
+                        <div class="w-full h-2 bg-gray-200 rounded-full">
+                            <div class="h-2 bg-primary rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="AI-Teacher-Interface-Design (1).html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+                                    <i class="ri-dashboard-line ri-lg"></i>
+                                </div>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="My-Enrolled-Courses.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+                                    <i class="ri-book-open-line ri-lg"></i>
+                                </div>
+                                <span>My Courses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="studying.html" class="flex items-center px-4 py-3 text-gray-800 bg-blue-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-primary">
+                                    <i class="ri-play-circle-line ri-lg"></i>
+                                </div>
+                                <span>Studying</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="schedule.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+                                    <i class="ri-calendar-line ri-lg"></i>
+                                </div>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="achievements.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+                                    <i class="ri-trophy-line ri-lg"></i>
+                                </div>
+                                <span>Achievements</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+                                <div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+                                    <i class="ri-settings-line ri-lg"></i>
+                                </div>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar" class="md:hidden fixed inset-0 z-50 bg-black bg-opacity-50 hidden">
+            <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg">
+                <div class="p-4 flex items-center justify-between border-b">
+                    <span class="font-['Pacifico'] text-xl text-primary">TeacherX</span>
+                    <button id="close-mobile-sidebar" class="p-2 rounded-lg hover:bg-gray-100">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col p-4 flex-grow overflow-y-auto">
+                    <div class="mb-8">
+                        <div class="flex flex-col items-center mb-6">
+                            <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden mb-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+                            </div>
+                            <h3 class="font-semibold text-gray-800 text-sm">Emily Johnson</h3>
+                            <p class="text-xs text-gray-500">Student</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-medium text-gray-700">Overall Progress</span>
+                                <span class="text-xs font-medium text-primary">78%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-gray-200 rounded-full">
+                                <div class="h-1.5 bg-primary rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav>
+                        <ul class="space-y-1">
+                            <li>
+                                <a href="AI-Teacher-Interface-Design (1).html" class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-500">
+                                        <i class="ri-dashboard-line"></i>
+                                    </div>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="My-Enrolled-Courses.html" class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-500">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span>My Courses</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="studying.html" class="flex items-center px-3 py-2 text-gray-800 bg-blue-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-primary">
+                                        <i class="ri-play-circle-line"></i>
+                                    </div>
+                                    <span>Studying</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="schedule.html" class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-500">
+                                        <i class="ri-calendar-line"></i>
+                                    </div>
+                                    <span>Schedule</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="achievements.html" class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-500">
+                                        <i class="ri-trophy-line"></i>
+                                    </div>
+                                    <span>Achievements</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="settings.html" class="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md text-sm">
+                                    <div class="w-5 h-5 flex items-center justify-center mr-3 text-gray-500">
+                                        <i class="ri-settings-line"></i>
+                                    </div>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Top Action Bar -->
+            <div class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center space-x-4">
+                        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                            <i class="ri-menu-line"></i>
+                        </button>
+                        <button id="sidebar-toggle-btn" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                            <i class="ri-sidebar-line" id="sidebar-toggle-icon"></i>
+                            <span class="text-sm font-medium text-gray-700">Toggle Sidebar</span>
+                        </button>
+                        <h1 class="text-xl font-bold text-gray-900">
+                            <!--<span class="font-['Pacifico'] text-primary">TeacherX</span> - Studying Session-->
+                        </h1>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600" id="timer">00:00</span>
+                            <div class="w-2 h-2 rounded-full bg-gray-400" id="status-indicator"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button id="startBtn" class="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-button font-medium hover:bg-blue-600 transition-colors">
+                            <i class="ri-play-line"></i>
+                            <span>Start Class</span>
+                        </button>
+                        <button id="pauseBtn" class="hidden flex items-center space-x-2 px-4 py-2 bg-yellow-600 text-white rounded-button font-medium hover:bg-yellow-700 transition-colors">
+                            <i class="ri-pause-line"></i>
+                            <span>Pause</span>
+                        </button>
+                        <button id="endBtn" class="hidden flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-button font-medium hover:bg-red-700 transition-colors">
+                            <i class="ri-stop-line"></i>
+                            <span>End Class</span>
+                        </button>
+                        <button id="restartBtn" class="hidden flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-button font-medium hover:bg-blue-700 transition-colors">
+                            <i class="ri-restart-line"></i>
+                            <span>Restart</span>
+                        </button>
+                        <button class="flex items-center space-x-2 px-4 py-2 bg-gray-600 text-white rounded-button font-medium hover:bg-gray-700 transition-colors">
+                            <i class="ri-download-line"></i>
+                            <span>Download Notes</span>
+                        </button>
+                        <button class="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-button font-medium hover:bg-purple-700 transition-colors">
+                            <i class="ri-book-open-line"></i>
+                            <span>View Homework</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Class Info Sidebar (Right Side) -->
+            <div class="flex flex-1">
+                <div class="flex-1 flex flex-col">
+                    <!-- Tab Navigation -->
+                    <div class="border-b border-gray-200 bg-white">
+                        <div class="flex space-x-1 p-4">
+                            <button class="tab-btn flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary text-white font-medium" data-tab="ai-teaching">
+                                <i class="ri-robot-line"></i>
+                                <span>AI Teaching</span>
+                            </button>
+                            <button class="tab-btn flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 font-medium" data-tab="coding">
+                                <i class="ri-code-s-slash-line"></i>
+                                <span>Live Coding</span>
+                            </button>
+                            <button class="tab-btn flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 font-medium" data-tab="whiteboard">
+                                <i class="ri-palette-line"></i>
+                                <span>Whiteboard</span>
+                            </button>
+                            <button class="tab-btn flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 font-medium" data-tab="summary">
+                                <i class="ri-file-text-line"></i>
+                                <span>Summary & Notes</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="flex-1 overflow-y-auto">
+                        <!-- AI Teaching Tab -->
+                        <div id="ai-teaching" class="tab-content active p-6 bg-gray-50">
+                            <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+                                <!-- Video Player Container -->
+                                <div class="relative bg-black" id="video-container">
+                                    <!-- AI Teacher Video -->
+                                    <div class="aspect-video bg-gradient-to-br from-blue-900 to-purple-900 flex items-center justify-center relative" id="ai-video-player">
+                                        <!-- AI Avatar -->
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mb-8">
+                                                <i class="ri-robot-line text-white text-4xl"></i>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- AI Teacher Info -->
+                                        <div class="absolute bottom-8 left-8 text-white">
+                                            <h3 class="text-xl font-semibold mb-1">AI Teacher Sarah</h3>
+                                            <p class="text-blue-200">Python Programming Expert</p>
+                                        </div>
+                                        
+                                        <!-- Video Controls Overlay -->
+                                        <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300" id="video-overlay">
+                                            <!-- Play/Pause Button -->
+                                            <button id="play-pause-btn" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all duration-200">
+                                                <i class="ri-play-fill text-white text-2xl"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Video Controls Bar -->
+                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 hover:opacity-100 transition-opacity duration-300" id="video-controls">
+                                        <!-- Progress Bar -->
+                                        <div class="w-full h-1 bg-gray-600 rounded-full mb-3 cursor-pointer" id="video-progress-container">
+                                            <div class="h-1 bg-red-500 rounded-full" id="video-progress" style="width: 0%"></div>
+                                        </div>
+                                        
+                                        <!-- Control Buttons -->
+                                        <div class="flex items-center justify-between text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <button id="play-pause-control" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-play-fill text-lg"></i>
+                                                </button>
+                                                <button id="rewind-btn" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-rewind-line text-lg"></i>
+                                                </button>
+                                                <button id="fast-forward-btn" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-speed-line text-lg"></i>
+                                                </button>
+                                                <div class="flex items-center space-x-2">
+                                                    <button id="volume-btn" class="hover:text-gray-300 transition-colors">
+                                                        <i class="ri-volume-up-line text-lg"></i>
+                                                    </button>
+                                                    <div class="w-20 h-1 bg-gray-600 rounded-full cursor-pointer" id="volume-slider">
+                                                        <div class="h-1 bg-white rounded-full" style="width: 80%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center space-x-1 text-sm">
+                                                    <span id="current-time">0:00</span>
+                                                    <span>/</span>
+                                                    <span id="total-time">45:00</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex items-center space-x-4">
+                                                <button id="quality-btn" class="hover:text-gray-300 transition-colors text-sm">
+                                                    HD
+                                                </button>
+                                                <button id="captions-btn" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-subtitle text-lg"></i>
+                                                </button>
+                                                <button id="settings-btn" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-settings-3-line text-lg"></i>
+                                                </button>
+                                                <button id="fullscreen-btn" class="hover:text-gray-300 transition-colors">
+                                                    <i class="ri-fullscreen-line text-lg"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI Teaching Status -->
+                                    <div class="absolute top-4 left-4 bg-red-600 text-white px-2 py-1 rounded text-xs font-medium">
+                                        LIVE
+                                    </div>
+                                    
+                                    <!-- AI Interaction Panel -->
+                                    <div class="absolute top-4 right-4 flex space-x-2">
+                                        <button class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all duration-200">
+                                            <i class="ri-mic-line"></i>
+                                        </button>
+                                        <button class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all duration-200">
+                                            <i class="ri-camera-line"></i>
+                                        </button>
+                                        <button class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition-all duration-200">
+                                            <i class="ri-chat-1-line"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Floating Sidebar Toggle (shows when sidebars are hidden) -->
+                                    <div id="floating-sidebar-toggle" class="absolute top-4 left-4 hidden">
+                                        <button class="bg-black bg-opacity-70 text-white px-3 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 flex items-center space-x-2">
+                                            <i class="ri-sidebar-line"></i>
+                                            <span class="text-sm">Show Sidebars</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Lesson Content Below Video -->
+                                <div class="p-6">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div>
+                                            <h2 class="text-2xl font-bold text-gray-800 mb-2">Introduction to Python Variables</h2>
+                                            <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                                <span>Lesson 1 of 5</span>
+                                                <span>•</span>
+                                                <span>45 minutes</span>
+                                                <span>•</span>
+                                                <span>Beginner Level</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                                                <i class="ri-heart-line"></i>
+                                                <span>Like</span>
+                                            </button>
+                                            <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                                                <i class="ri-share-line"></i>
+                                                <span>Share</span>
+                                            </button>
+                                            <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                                                <i class="ri-download-line"></i>
+                                                <span>Download</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI Teacher Description -->
+                                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg mb-6">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                                            <i class="ri-robot-line text-white text-xl"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold text-gray-800">AI Teacher Sarah</h3>
+                                            <p class="text-sm text-gray-600">Python Programming Expert with 5+ years of teaching experience</p>
+                                        </div>
+                                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                            Follow
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Lesson Description -->
+                                    <div class="mb-6">
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-3">About this lesson</h3>
+                                        <p class="text-gray-700 leading-relaxed">
+                                            In this comprehensive lesson, you'll learn the fundamentals of Python variables and data types. 
+                                            Our AI teacher Sarah will guide you through practical examples, interactive exercises, and real-world applications. 
+                                            By the end of this lesson, you'll be able to create and manipulate variables confidently.
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Quick Actions -->
+                                    <div class="flex flex-wrap gap-3">
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="doubt">
+                                            <i class="ri-question-line"></i>
+                                            <span>Ask Question</span>
+                                        </button>
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="repeat">
+                                            <i class="ri-repeat-line"></i>
+                                            <span>Repeat Section</span>
+                                        </button>
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="translate">
+                                            <i class="ri-translate-2"></i>
+                                            <span>Translate</span>
+                                        </button>
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="summarize">
+                                            <i class="ri-file-text-line"></i>
+                                            <span>Generate Summary</span>
+                                        </button>
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="draw">
+                                            <i class="ri-pen-tool-line"></i>
+                                            <span>AI Draw Diagram</span>
+                                        </button>
+                                        <button class="ai-control flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors" data-action="code">
+                                            <i class="ri-code-s-slash-line"></i>
+                                            <span>Show Code Example</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Class Info Section (Always visible below lecture) -->
+                                    <div id="class-info-section" class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                            <!-- Timer and Progress -->
+                                            <div class="bg-white rounded-lg p-4 shadow-sm">
+                                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Class Timer</h3>
+                                                <div class="flex items-center justify-between mb-3">
+                                                    <span class="text-sm font-medium text-gray-600">Progress</span>
+                                                    <div class="flex space-x-1">
+                                                        <button class="timer-preset px-2 py-1 text-xs rounded bg-primary text-white" data-preset="30">30m</button>
+                                                        <button class="timer-preset px-2 py-1 text-xs rounded bg-gray-200 text-gray-600 hover:bg-gray-300" data-preset="45">45m</button>
+                                                        <button class="timer-preset px-2 py-1 text-xs rounded bg-gray-200 text-gray-600 hover:bg-gray-300" data-preset="60">60m</button>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                                    <div id="progress-bar-alt" class="bg-primary h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                                </div>
+                                                <div class="flex justify-between text-sm text-gray-600">
+                                                    <span id="progress-text-alt">0% complete</span>
+                                                    <span id="timer-display-alt">00:00 / 45:00</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Lesson Steps -->
+                                            <div class="bg-white rounded-lg p-4 shadow-sm">
+                                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Lesson Steps</h3>
+                                                <div class="space-y-2" id="lesson-steps-alt">
+                                                    <div class="flex items-center space-x-2 p-2 rounded-lg bg-green-100 text-green-800">
+                                                        <i class="ri-check-line text-green-600"></i>
+                                                        <span class="text-sm">Introduction to Variables</span>
+                                                    </div>
+                                                    <div class="flex items-center space-x-2 p-2 rounded-lg bg-gray-100 text-gray-600">
+                                                        <i class="ri-circle-line"></i>
+                                                        <span class="text-sm">Data Types in Python</span>
+                                                    </div>
+                                                    <div class="flex items-center space-x-2 p-2 rounded-lg bg-gray-100 text-gray-600">
+                                                        <i class="ri-circle-line"></i>
+                                                        <span class="text-sm">Working with Strings</span>
+                                                    </div>
+                                                    <div class="flex items-center space-x-2 p-2 rounded-lg bg-gray-100 text-gray-600">
+                                                        <i class="ri-circle-line"></i>
+                                                        <span class="text-sm">Practice Exercises</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Quick Notes -->
+                                            <div class="bg-white rounded-lg p-4 shadow-sm">
+                                                <h3 class="text-lg font-semibold text-gray-800 mb-3">Quick Notes</h3>
+                                                <textarea id="notes-alt" placeholder="Take notes here..." class="w-full h-24 p-3 text-sm rounded-lg border resize-none bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-primary focus:border-primary"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Homework Section -->
+                                        <div class="mt-6 bg-white rounded-lg p-4 shadow-sm">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <h3 class="text-lg font-semibold text-gray-800">Homework</h3>
+                                                <button id="generate-homework-alt" class="text-sm text-primary hover:text-blue-700">Generate</button>
+                                            </div>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="homework-list-alt">
+                                                <div class="flex items-center space-x-2">
+                                                    <input type="checkbox" class="rounded">
+                                                    <span class="text-sm text-gray-700">Create a variable called "favorite_color"</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <input type="checkbox" class="rounded">
+                                                    <span class="text-sm text-gray-700">Write a program that prints your name and age</span>
+                                                </div>
+                                                <div class="flex items-center space-x-2">
+                                                    <input type="checkbox" class="rounded">
+                                                    <span class="text-sm text-gray-700">Practice using different data types</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Coding Tab -->
+                        <div id="coding" class="tab-content p-6 bg-gray-50">
+                            <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+                                <!-- Editor Header -->
+                                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                    <div class="flex items-center space-x-4">
+                                        <h3 class="text-lg font-semibold text-gray-800">
+                                            Live Code Editor
+                                        </h3>
+                                        <select id="language-select" class="px-3 py-1 rounded border bg-white border-gray-300 text-gray-900 focus:ring-2 focus:ring-primary focus:border-primary">
+                                            <option value="python">Python</option>
+                                            <option value="javascript">JavaScript</option>
+                                            <option value="java">Java</option>
+                                            <option value="cpp">C++</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button id="run-code" class="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-button font-medium hover:bg-blue-600 transition-colors">
+                                            <i class="ri-play-line"></i>
+                                            <span>Run</span>
+                                        </button>
+                                        <button id="reset-code" class="flex items-center space-x-2 px-4 py-2 bg-gray-600 text-white rounded-button font-medium hover:bg-gray-700 transition-colors">
+                                            <i class="ri-restart-line"></i>
+                                            <span>Reset</span>
+                                        </button>
+                                        <button id="copy-code" class="flex items-center space-x-2 px-4 py-2 bg-primary text-white rounded-button font-medium hover:bg-blue-600 transition-colors">
+                                            <i class="ri-download-line"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Code Editor -->
+                                <div class="flex h-96">
+                                    <div class="flex-1">
+                                        <div class="bg-gray-100 p-2 border-b border-gray-300">
+                                            <span class="text-sm text-gray-600">AI Teacher's Code Examples</span>
+                                        </div>
+                                        <textarea id="code-editor" class="w-full h-full p-4 font-mono text-sm resize-none bg-gray-50 text-gray-900 border-r border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="AI will write code examples here..."># Welcome to Python!
+# Let's start with variables
+
+name = "Student"
+age = 18
+is_student = True
+
+print(f"Hello {name}, you are {age} years old!")
+print(f"Are you a student? {is_student}")
+
+# Try changing the values above and run the code!</textarea>
+                                    </div>
+                                    <div class="w-1/3">
+                                        <div class="h-full p-4 bg-gray-50">
+                                            <h4 class="font-semibold mb-2 text-gray-800">
+                                                Output
+                                            </h4>
+                                            <pre id="code-output" class="text-sm font-mono whitespace-pre-wrap text-gray-700">AI will run code and show results here...</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Whiteboard Tab -->
+                        <div id="whiteboard" class="tab-content p-6 bg-gray-50">
+                            <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+                                <!-- Whiteboard Header -->
+                                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-800">
+                                        Interactive Whiteboard
+                                    </h3>
+                                    <div class="flex space-x-2">
+                                        <button class="whiteboard-tool p-2 rounded-lg bg-primary text-white" data-tool="pen">
+                                            <i class="ri-pen-tool-line"></i>
+                                        </button>
+                                        <button class="whiteboard-tool p-2 rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300" data-tool="text">
+                                            <i class="ri-text"></i>
+                                        </button>
+                                        <button class="whiteboard-tool p-2 rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300" data-tool="eraser">
+                                            <i class="ri-eraser-line"></i>
+                                        </button>
+                                        <div class="w-px bg-gray-300 mx-2"></div>
+                                        <button id="undo-whiteboard" class="p-2 rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300">
+                                            <i class="ri-arrow-go-back-line"></i>
+                                        </button>
+                                        <button id="redo-whiteboard" class="p-2 rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300">
+                                            <i class="ri-arrow-go-forward-line"></i>
+                                        </button>
+                                        <button id="clear-whiteboard" class="p-2 rounded-lg bg-gray-200 text-gray-600 hover:bg-gray-300">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                        <button id="export-whiteboard" class="flex items-center space-x-2 px-3 py-2 bg-primary text-white rounded-button font-medium hover:bg-blue-600 transition-colors">
+                                            <i class="ri-download-line"></i>
+                                            <span>Export PNG</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Whiteboard Canvas -->
+                                <div class="h-96 bg-white border-2 border-dashed border-gray-300 flex items-center justify-center relative" id="whiteboard-container">
+                                    <div class="text-center" id="whiteboard-placeholder">
+                                        <i class="ri-pen-tool-line text-4xl text-gray-400 mx-auto mb-2"></i>
+                                        <p class="text-gray-500">AI Teacher's Whiteboard</p>
+                                        <p class="text-sm text-gray-400">AI will draw diagrams and examples here • You can also draw!</p>
+                                    </div>
+                                    <div id="whiteboard-content" class="hidden absolute inset-0 p-4">
+                                        <!-- AI drawings will appear here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Summary Tab -->
+                        <div id="summary" class="tab-content p-6 bg-gray-50">
+                            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-6">
+                                <h3 class="text-xl font-semibold mb-6 text-gray-800">
+                                    Class Summary & Notes
+                                </h3>
+
+                                <!-- Summary -->
+                                <div class="mb-8">
+                                    <h4 class="text-lg font-medium mb-3 text-gray-800">
+                                        Today's Lesson Summary
+                                    </h4>
+                                    <div class="p-4 rounded-lg bg-blue-50">
+                                        <ul class="space-y-2 text-gray-800">
+                                            <li>• Variables are containers for storing data values</li>
+                                            <li>• Python is dynamically typed - no need to declare variable types</li>
+                                            <li>• Common data types: strings, integers, floats, booleans</li>
+                                            <li>• Use meaningful variable names for better code readability</li>
+                                            <li>• Variables can be reassigned with new values</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Key Concepts -->
+                                <div class="mb-8">
+                                    <h4 class="text-lg font-medium mb-3 text-gray-800">
+                                        Key Concepts
+                                    </h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="p-4 rounded-lg border bg-gray-50 border-gray-200">
+                                            <h5 class="font-medium mb-1 text-gray-800">Variables</h5>
+                                            <p class="text-sm text-gray-600">Containers for storing data</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg border bg-gray-50 border-gray-200">
+                                            <h5 class="font-medium mb-1 text-gray-800">Data Types</h5>
+                                            <p class="text-sm text-gray-600">Different kinds of data (string, int, bool)</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg border bg-gray-50 border-gray-200">
+                                            <h5 class="font-medium mb-1 text-gray-800">Assignment</h5>
+                                            <p class="text-sm text-gray-600">Using = to assign values to variables</p>
+                                        </div>
+                                        <div class="p-4 rounded-lg border bg-gray-50 border-gray-200">
+                                            <h5 class="font-medium mb-1 text-gray-800">Print Function</h5>
+                                            <p class="text-sm text-gray-600">Displaying output to the console</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Homework Section -->
+                                <div>
+                                    <h4 class="text-lg font-medium mb-3 text-gray-800">
+                                        Homework Assignment
+                                    </h4>
+                                    <div class="p-4 rounded-lg bg-yellow-50">
+                                        <p class="mb-3 text-gray-800">
+                                            Complete the following exercises to practice what you learned:
+                                        </p>
+                                        <ol class="space-y-2 text-gray-800">
+                                            <li>1. Create variables for your name, age, and favorite hobby</li>
+                                            <li>2. Write a program that calculates the area of a rectangle</li>
+                                            <li>3. Practice using different data types in your code</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize icons (Remix icons are loaded via CSS)
+
+        // State variables
+        let classStatus = 'idle';
+        let timer = 0;
+        let timerPreset = 45;
+        let progress = 0;
+        let timerInterval;
+
+
+
+        // Video player state
+        let isPlaying = false;
+        let currentVideoTime = 0;
+        let totalVideoTime = 2700; // 45 minutes in seconds
+        let videoProgress = 0;
+        let isFullscreen = false;
+        let isSidebarHidden = false;
+
+        // AI messages for different actions
+        const aiMessages = {
+            doubt: 'Great question! Let me explain that in more detail. Variables in Python are like containers that store data. When you write "name = John", you\'re creating a variable called "name" and storing the value "John" in it.',
+            repeat: 'Let me repeat: Variables are containers for storing data values. In Python, you don\'t need to declare the type of variable. Python figures it out automatically!',
+            translate: 'चलिए हिंदी में समझते हैं: Python में variables डेटा स्टोर करने के लिए containers होते हैं। जब आप "name = John" लिखते हैं, तो आप एक variable बना रहे हैं जिसमें "John" की value store होती है।',
+            summarize: 'Summary: Variables store data, Python is dynamically typed, and you can use variables to make your code more readable and reusable.',
+            draw: 'Let me draw a diagram to explain variables and data types visually!',
+            code: 'Let me show you some practical code examples to demonstrate these concepts!'
+        };
+
+        // Timer functions
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            timer++;
+            const progressPercent = Math.min((timer / (timerPreset * 60)) * 100, 100);
+            progress = progressPercent;
+            
+            document.getElementById('timer').textContent = formatTime(timer);
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}% complete`;
+            document.getElementById('timer-display').textContent = `${formatTime(timer)} / ${timerPreset}:00`;
+        }
+
+        // Class control functions
+        function startClass() {
+            classStatus = 'active';
+            timer = 0;
+            progress = 0;
+            document.getElementById('startBtn').classList.add('hidden');
+            document.getElementById('pauseBtn').classList.remove('hidden');
+            document.getElementById('endBtn').classList.remove('hidden');
+            document.getElementById('status-indicator').className = 'w-2 h-2 rounded-full bg-green-500';
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function pauseClass() {
+            classStatus = 'paused';
+            document.getElementById('pauseBtn').classList.add('hidden');
+            document.getElementById('startBtn').classList.remove('hidden');
+                            document.getElementById('startBtn').innerHTML = '<i class="ri-play-line"></i><span>Resume</span>';
+            document.getElementById('status-indicator').className = 'w-2 h-2 rounded-full bg-yellow-500';
+            clearInterval(timerInterval);
+        }
+
+        function endClass() {
+            classStatus = 'ended';
+            document.getElementById('startBtn').classList.add('hidden');
+            document.getElementById('pauseBtn').classList.add('hidden');
+            document.getElementById('endBtn').classList.add('hidden');
+            document.getElementById('restartBtn').classList.remove('hidden');
+            document.getElementById('status-indicator').className = 'w-2 h-2 rounded-full bg-gray-400';
+            clearInterval(timerInterval);
+        }
+
+        function restartClass() {
+            classStatus = 'idle';
+            timer = 0;
+            progress = 0;
+            document.getElementById('restartBtn').classList.add('hidden');
+            document.getElementById('startBtn').classList.remove('hidden');
+                            document.getElementById('startBtn').innerHTML = '<i class="ri-play-line"></i><span>Start Class</span>';
+            document.getElementById('status-indicator').className = 'w-2 h-2 rounded-full bg-gray-400';
+            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('progress-text').textContent = '0% complete';
+            document.getElementById('timer-display').textContent = '00:00 / 45:00';
+        }
+
+        // Tab switching
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to selected tab button
+            event.target.closest('.tab-btn').classList.add('bg-primary', 'text-white');
+            event.target.closest('.tab-btn').classList.remove('text-gray-600', 'hover:bg-gray-100');
+        }
+
+        // Video player functions
+        function formatVideoTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateVideoProgress() {
+            if (isPlaying) {
+                currentVideoTime++;
+                videoProgress = (currentVideoTime / totalVideoTime) * 100;
+                
+                document.getElementById('video-progress').style.width = `${videoProgress}%`;
+                document.getElementById('current-time').textContent = formatVideoTime(currentVideoTime);
+                
+                if (currentVideoTime >= totalVideoTime) {
+                    pauseVideo();
+                }
+            }
+        }
+
+        function playVideo() {
+            isPlaying = true;
+            document.getElementById('play-pause-btn').innerHTML = '<i class="ri-pause-fill text-white text-2xl"></i>';
+            document.getElementById('play-pause-control').innerHTML = '<i class="ri-pause-fill text-lg"></i>';
+            document.getElementById('video-overlay').style.pointerEvents = 'none';
+        }
+
+        function pauseVideo() {
+            isPlaying = false;
+            document.getElementById('play-pause-btn').innerHTML = '<i class="ri-play-fill text-white text-2xl"></i>';
+            document.getElementById('play-pause-control').innerHTML = '<i class="ri-play-fill text-lg"></i>';
+            document.getElementById('video-overlay').style.pointerEvents = 'auto';
+        }
+
+        function toggleFullscreen() {
+            const videoContainer = document.getElementById('video-container');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            
+            if (!isFullscreen) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.webkitRequestFullscreen) {
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) {
+                    videoContainer.msRequestFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="ri-fullscreen-exit-line text-lg"></i>';
+                isFullscreen = true;
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.innerHTML = '<i class="ri-fullscreen-line text-lg"></i>';
+                isFullscreen = false;
+            }
+        }
+
+        function seekVideo(event) {
+            const progressContainer = document.getElementById('video-progress-container');
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const progressWidth = rect.width;
+            const seekPercent = clickX / progressWidth;
+            
+            currentVideoTime = Math.floor(seekPercent * totalVideoTime);
+            videoProgress = seekPercent * 100;
+            
+            document.getElementById('video-progress').style.width = `${videoProgress}%`;
+            document.getElementById('current-time').textContent = formatVideoTime(currentVideoTime);
+        }
+
+        // Sidebar toggle function
+        function toggleSidebar() {
+            const mainSidebar = document.getElementById('main-sidebar');
+            const sidebarToggleIcon = document.getElementById('sidebar-toggle-icon');
+            const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+            const floatingToggle = document.getElementById('floating-sidebar-toggle');
+            
+            if (isSidebarHidden) {
+                // Show main sidebar
+                mainSidebar.classList.remove('hidden');
+                mainSidebar.classList.add('md:flex');
+                floatingToggle.classList.add('hidden');
+                sidebarToggleIcon.className = 'ri-sidebar-line';
+                sidebarToggleBtn.innerHTML = '<i class="ri-sidebar-line" id="sidebar-toggle-icon"></i><span class="text-sm font-medium text-gray-700">Hide Sidebar</span>';
+                isSidebarHidden = false;
+            } else {
+                // Hide main sidebar
+                mainSidebar.classList.add('hidden');
+                mainSidebar.classList.remove('md:flex');
+                floatingToggle.classList.remove('hidden');
+                sidebarToggleIcon.className = 'ri-sidebar-unfold-line';
+                sidebarToggleBtn.innerHTML = '<i class="ri-sidebar-unfold-line" id="sidebar-toggle-icon"></i><span class="text-sm font-medium text-gray-700">Show Sidebar</span>';
+                isSidebarHidden = true;
+            }
+        }
+
+        // Update timer function to sync both displays
+        function updateTimer() {
+            timer++;
+            const progressPercent = Math.min((timer / (timerPreset * 60)) * 100, 100);
+            progress = progressPercent;
+            
+            document.getElementById('timer').textContent = formatTime(timer);
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${Math.round(progress)}% complete`;
+            document.getElementById('timer-display').textContent = `${formatTime(timer)} / ${timerPreset}:00`;
+            
+            // Update alternative display when sidebar is hidden
+            if (isSidebarHidden) {
+                document.getElementById('progress-bar-alt').style.width = `${progress}%`;
+                document.getElementById('progress-text-alt').textContent = `${Math.round(progress)}% complete`;
+                document.getElementById('timer-display-alt').textContent = `${formatTime(timer)} / ${timerPreset}:00`;
+            }
+        }
+
+        // AI control functions
+        function handleAIControl(action) {
+            // Show notification for AI actions
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            notification.textContent = `AI Teacher: ${aiMessages[action]}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+            
+            // Handle AI drawing
+            if (action === 'draw') {
+                setTimeout(() => {
+                    showAIDrawing();
+                }, 1000);
+            }
+            
+            // Handle AI coding
+            if (action === 'code') {
+                setTimeout(() => {
+                    showAICode();
+                }, 1000);
+            }
+        }
+        
+        // AI Drawing functionality
+        function showAIDrawing() {
+            const whiteboardPlaceholder = document.getElementById('whiteboard-placeholder');
+            const whiteboardContent = document.getElementById('whiteboard-content');
+            
+            whiteboardPlaceholder.classList.add('hidden');
+            whiteboardContent.classList.remove('hidden');
+            
+            // Simulate AI drawing
+            whiteboardContent.innerHTML = `
+                <div class="bg-white p-4 rounded-lg shadow-sm border">
+                    <h4 class="font-semibold text-gray-800 mb-3">Variables & Data Types Diagram</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-8 bg-blue-100 border-2 border-blue-300 rounded flex items-center justify-center text-sm font-mono">name</div>
+                            <div class="text-gray-600">→</div>
+                            <div class="w-20 h-8 bg-green-100 border-2 border-green-300 rounded flex items-center justify-center text-sm">"John"</div>
+                            <div class="text-xs text-gray-500">(String)</div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-8 bg-blue-100 border-2 border-blue-300 rounded flex items-center justify-center text-sm font-mono">age</div>
+                            <div class="text-gray-600">→</div>
+                            <div class="w-20 h-8 bg-orange-100 border-2 border-orange-300 rounded flex items-center justify-center text-sm">25</div>
+                            <div class="text-xs text-gray-500">(Integer)</div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-8 bg-blue-100 border-2 border-blue-300 rounded flex items-center justify-center text-sm font-mono">is_student</div>
+                            <div class="text-gray-600">→</div>
+                            <div class="w-20 h-8 bg-purple-100 border-2 border-purple-300 rounded flex items-center justify-center text-sm">True</div>
+                            <div class="text-xs text-gray-500">(Boolean)</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-2 bg-yellow-50 border border-yellow-200 rounded">
+                        <p class="text-sm text-gray-700">💡 Variables are like labeled boxes that store different types of data!</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // AI Coding functionality
+        function showAICode() {
+            const codeEditor = document.getElementById('code-editor');
+            const codeOutput = document.getElementById('code-output');
+            
+            // AI writes new code examples
+            const aiCodeExamples = `# AI Teacher's Code Examples
+# Let's explore different data types in Python
+
+# 1. String Variables
+student_name = "Emily"
+course = "Python Programming"
+print(f"Student: {student_name}")
+print(f"Course: {course}")
+
+# 2. Numeric Variables
+age = 18
+score = 95.5
+print(f"Age: {age} (integer)")
+print(f"Score: {score} (float)")
+
+# 3. Boolean Variables
+is_enrolled = True
+has_completed = False
+print(f"Enrolled: {is_enrolled}")
+print(f"Completed: {has_completed}")
+
+# 4. List Variables (collections)
+subjects = ["Math", "Physics", "Programming"]
+grades = [85, 92, 88]
+print(f"Subjects: {subjects}")
+print(f"Grades: {grades}")
+
+# 5. Dictionary Variables (key-value pairs)
+student_info = {
+    "name": "Emily",
+    "age": 18,
+    "courses": ["Python", "Calculus"]
+}
+print(f"Student Info: {student_info}")
+
+# Let's run this to see the output!`;
+            
+            codeEditor.value = aiCodeExamples;
+            
+            // Simulate AI running the code
+            setTimeout(() => {
+                codeOutput.textContent = `Student: Emily
+Course: Python Programming
+Age: 18 (integer)
+Score: 95.5 (float)
+Enrolled: True
+Completed: False
+Subjects: ['Math', 'Physics', 'Programming']
+Grades: [85, 92, 88]
+Student Info: {'name': 'Emily', 'age': 18, 'courses': ['Python', 'Calculus']}
+
+✅ Code executed successfully by AI Teacher!
+💡 Notice how different data types are handled automatically by Python.`;
+            }, 1500);
+        }
+
+        // Code execution simulation
+        function runCode() {
+            const output = 'Hello Student, you are 18 years old!\nAre you a student? True\n\nCode executed successfully!';
+            document.getElementById('code-output').textContent = output;
+        }
+
+        function resetCode() {
+            const defaultCode = `# Welcome to Python!
+# Let's start with variables
+
+name = "Student"
+age = 18
+is_student = True
+
+print(f"Hello {name}, you are {age} years old!")
+print(f"Are you a student? {is_student}")
+
+# Try changing the values above and run the code!`;
+            document.getElementById('code-editor').value = defaultCode;
+            document.getElementById('code-output').textContent = 'Run your code to see the output here...';
+        }
+
+        function copyCode() {
+            const codeEditor = document.getElementById('code-editor');
+            codeEditor.select();
+            document.execCommand('copy');
+            alert('Code copied to clipboard!');
+        }
+
+        // Whiteboard functions
+        function clearWhiteboard() {
+            if (confirm('Are you sure you want to clear the whiteboard?')) {
+                // Implementation for clearing whiteboard
+                alert('Whiteboard cleared!');
+            }
+        }
+
+        function exportWhiteboard() {
+            alert('Whiteboard exported as PNG!');
+        }
+
+
+
+        // Mobile sidebar toggle
+        function toggleMobileSidebar() {
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            mobileSidebar.classList.toggle('hidden');
+        }
+
+        function closeMobileSidebar() {
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            mobileSidebar.classList.add('hidden');
+        }
+
+        // Timer preset selection
+        function selectTimerPreset(preset) {
+            timerPreset = preset;
+            document.querySelectorAll('.timer-preset').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+            });
+            event.target.classList.add('bg-primary', 'text-white');
+            event.target.classList.remove('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+            document.getElementById('timer-display').textContent = `00:00 / ${timerPreset}:00`;
+            document.getElementById('timer-display-alt').textContent = `00:00 / ${timerPreset}:00`;
+        }
+
+        // Whiteboard tool selection
+        function selectWhiteboardTool(tool) {
+            document.querySelectorAll('.whiteboard-tool').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+            });
+            event.target.closest('.whiteboard-tool').classList.add('bg-primary', 'text-white');
+            event.target.closest('.whiteboard-tool').classList.remove('bg-gray-200', 'text-gray-600', 'hover:bg-gray-300');
+        }
+
+        // Event listeners
+        document.getElementById('startBtn').addEventListener('click', startClass);
+        document.getElementById('pauseBtn').addEventListener('click', pauseClass);
+        document.getElementById('endBtn').addEventListener('click', endClass);
+        document.getElementById('restartBtn').addEventListener('click', restartClass);
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileSidebar);
+        document.getElementById('close-mobile-sidebar').addEventListener('click', closeMobileSidebar);
+        document.getElementById('sidebar-toggle-btn').addEventListener('click', toggleSidebar);
+        
+        // Floating sidebar toggle
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('#floating-sidebar-toggle')) {
+                toggleSidebar();
+            }
+        });
+        document.getElementById('run-code').addEventListener('click', runCode);
+        document.getElementById('reset-code').addEventListener('click', resetCode);
+        document.getElementById('copy-code').addEventListener('click', copyCode);
+        document.getElementById('clear-whiteboard').addEventListener('click', clearWhiteboard);
+        document.getElementById('export-whiteboard').addEventListener('click', exportWhiteboard);
+
+        // Video player event listeners
+        document.getElementById('play-pause-btn').addEventListener('click', () => {
+            if (isPlaying) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        });
+
+        document.getElementById('play-pause-control').addEventListener('click', () => {
+            if (isPlaying) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        });
+
+        document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+        document.getElementById('video-progress-container').addEventListener('click', seekVideo);
+        document.getElementById('rewind-btn').addEventListener('click', () => {
+            currentVideoTime = Math.max(0, currentVideoTime - 10);
+            videoProgress = (currentVideoTime / totalVideoTime) * 100;
+            document.getElementById('video-progress').style.width = `${videoProgress}%`;
+            document.getElementById('current-time').textContent = formatVideoTime(currentVideoTime);
+        });
+
+        document.getElementById('fast-forward-btn').addEventListener('click', () => {
+            currentVideoTime = Math.min(totalVideoTime, currentVideoTime + 10);
+            videoProgress = (currentVideoTime / totalVideoTime) * 100;
+            document.getElementById('video-progress').style.width = `${videoProgress}%`;
+            document.getElementById('current-time').textContent = formatVideoTime(currentVideoTime);
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+        });
+
+        // AI controls
+        document.querySelectorAll('.ai-control').forEach(btn => {
+            btn.addEventListener('click', () => handleAIControl(btn.dataset.action));
+        });
+
+        // Timer presets
+        document.querySelectorAll('.timer-preset').forEach(btn => {
+            btn.addEventListener('click', () => selectTimerPreset(parseInt(btn.dataset.preset)));
+        });
+
+        // Whiteboard tools
+        document.querySelectorAll('.whiteboard-tool').forEach(btn => {
+            btn.addEventListener('click', () => selectWhiteboardTool(btn.dataset.tool));
+        });
+
+
+
+        // Generate homework
+        document.getElementById('generate-homework').addEventListener('click', function() {
+            const homeworkList = document.getElementById('homework-list');
+            const newHomework = [
+                'Create a variable called "favorite_color" and assign your favorite color to it',
+                'Write a program that prints your name and age using variables',
+                'Practice using different data types: string, integer, and boolean'
+            ];
+            
+            homeworkList.innerHTML = newHomework.map(hw => `
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" class="rounded">
+                    <span class="text-sm text-gray-700">${hw}</span>
+                </div>
+            `).join('');
+        });
+
+        // Generate homework for alternative display
+        document.getElementById('generate-homework-alt').addEventListener('click', function() {
+            const homeworkList = document.getElementById('homework-list-alt');
+            const newHomework = [
+                'Create a variable called "favorite_color" and assign your favorite color to it',
+                'Write a program that prints your name and age using variables',
+                'Practice using different data types: string, integer, and boolean'
+            ];
+            
+            homeworkList.innerHTML = newHomework.map(hw => `
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" class="rounded">
+                    <span class="text-sm text-gray-700">${hw}</span>
+                </div>
+            `).join('');
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial state
+            document.getElementById('timer').textContent = '00:00';
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('progress-text').textContent = '0% complete';
+            document.getElementById('timer-display').textContent = '00:00 / 45:00';
+            document.getElementById('timer-display-alt').textContent = '00:00 / 45:00';
+            
+            // Start video progress update interval
+            setInterval(updateVideoProgress, 1000);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Ctrl/Cmd + B to toggle sidebar
+            if ((event.ctrlKey || event.metaKey) && event.key === 'b') {
+                event.preventDefault();
+                toggleSidebar();
+            }
+            
+            // Space to play/pause video
+            if (event.code === 'Space' && event.target.tagName !== 'TEXTAREA' && event.target.tagName !== 'INPUT') {
+                event.preventDefault();
+                if (isPlaying) {
+                    pauseVideo();
+                } else {
+                    playVideo();
+                }
+            }
+            
+            // F for fullscreen
+            if (event.key === 'f' || event.key === 'F') {
+                event.preventDefault();
+                toggleFullscreen();
+            }
+        });
+    </script>
+</body>
+</html> 

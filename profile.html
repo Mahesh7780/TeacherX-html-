@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile - TeacherX</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4A90E2',secondary:'#67C587',success:'#34D399',warning:'#FBBF24',error:'#EF4444',info:'#60A5FA'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #F8F9FA;
+transition: background-color 0.3s, color 0.3s;
+}
+body.dark {
+background-color: #111827;
+color: #F3F4F6;
+}
+.dark .bg-white {
+background-color: #1F2937;
+}
+.dark .bg-gray-50 {
+background-color: #374151;
+}
+.dark .text-gray-800 {
+color: #F3F4F6;
+}
+.dark .text-gray-700 {
+color: #E5E7EB;
+}
+.dark .text-gray-600 {
+color: #D1D5DB;
+}
+.dark .text-gray-500 {
+color: #9CA3AF;
+}
+.dark .border-gray-200 {
+border-color: #374151;
+}
+.dark .border-gray-300 {
+border-color: #4B5563;
+}
+.dark .bg-blue-50 {
+background-color: rgba(59, 130, 246, 0.1);
+}
+.dark .shadow-sm {
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.dark .shadow-lg {
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+.progress-ring {
+transform: rotate(-90deg);
+}
+.progress-ring-circle {
+stroke-dasharray: 283;
+transition: stroke-dashoffset 0.5s;
+}
+.profile-card {
+transition: all 0.3s ease;
+}
+.profile-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+.stat-card {
+transition: all 0.3s ease;
+}
+.stat-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+</style>
+</head>
+<body>
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden md:flex md:flex-col w-64 bg-white shadow-lg">
+<div class="p-4 flex items-center justify-center border-b">
+<span class="font-['Pacifico'] text-2xl text-primary">TeacherX</span>
+</div>
+<div class="flex flex-col p-4 flex-grow overflow-y-auto">
+<div class="mb-8">
+<div class="flex flex-col items-center mb-6">
+<div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden mb-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="font-semibold text-gray-800">Emily Johnson</h3>
+<p class="text-sm text-gray-500">Student</p>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Overall Progress</span>
+<span class="text-sm font-medium text-primary">78%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-primary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<nav>
+<ul class="space-y-2">
+<li>
+<a href="AI-Teacher-Interface-Design (1).html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-dashboard-line ri-lg"></i>
+</div>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a href="My-Enrolled-Courses.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-book-open-line ri-lg"></i>
+</div>
+<span>My Courses</span>
+</a>
+</li>
+<li>
+<a href="studying.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-play-circle-line ri-lg"></i>
+</div>
+<span>Studying</span>
+</a>
+</li>
+<li>
+<a href="schedule.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-calendar-line ri-lg"></i>
+</div>
+<span>Schedule</span>
+</a>
+</li>
+
+<li>
+<a href="achievements.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-trophy-line ri-lg"></i>
+</div>
+<span>Achievements</span>
+</a>
+</li>
+<li>
+<a href="settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-md">
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-gray-500">
+<i class="ri-settings-line ri-lg"></i>
+</div>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="mt-auto pt-6">
+<div class="bg-blue-50 rounded-lg p-4">
+<div class="flex items-center mb-3">
+<div class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white mr-3">
+<i class="ri-robot-line"></i>
+</div>
+<h4 class="font-medium text-gray-800">AI Tutor</h4>
+</div>
+<p class="text-sm text-gray-600 mb-3">Need help with your studies? Your AI tutor is ready to assist!</p>
+<button class="w-full bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-blue-600 transition whitespace-nowrap">
+Ask AI Tutor
+</button>
+</div>
+</div>
+</div>
+</aside>
+
+<!-- Main Content -->
+<div class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="bg-white shadow-sm z-10">
+<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center">
+<button class="md:hidden mr-4 text-gray-500 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</button>
+<div class="relative md:hidden">
+<span class="font-['Pacifico'] text-xl text-primary">TeacherX</span>
+</div>
+</div>
+<div class="hidden md:flex items-center flex-1 max-w-lg mx-auto">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+<input type="text" class="block w-full pl-10 pr-4 py-2 border border-gray-200 rounded-md focus:ring-2 focus:ring-primary focus:border-primary bg-gray-50 text-gray-700" placeholder="Search...">
+</div>
+</div>
+<div class="flex items-center">
+<div class="flex items-center">
+<div class="relative mr-4">
+<button class="relative p-2 text-gray-600 hover:text-gray-800 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-notification-3-line"></i>
+</div>
+<span class="absolute top-0 right-0 h-5 w-5 flex items-center justify-center text-xs text-white bg-red-500 rounded-full">3</span>
+</button>
+</div>
+<div class="relative mr-2">
+<button id="theme-toggle" class="p-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">
+<div class="w-6 h-6 flex items-center justify-center">
+<i id="theme-toggle-icon" class="ri-moon-line"></i>
+</div>
+</button>
+</div>
+<div class="relative">
+<a href="profile.html" class="flex items-center focus:outline-none">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Profile" class="w-full h-full object-cover object-top">
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-gray-50 p-6">
+<div class="max-w-7xl mx-auto">
+<!-- Profile Header -->
+<div class="mb-8">
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="relative h-48">
+<div style="background-image: url('https://readdy.ai/api/search-image?query=abstract%20educational%20technology%20background%20with%20soft%20blue%20gradient%2C%20digital%20learning%20elements%2C%20subtle%20tech%20patterns%2C%20clean%20modern%20design%2C%20high%20quality%20professional%20lighting&width=1200&height=400&seq=2&orientation=landscape');" class="absolute inset-0 bg-cover bg-center"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-600/30"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<div class="flex items-end">
+<div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden mr-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20student%20with%20glasses%2C%20looking%20confident%2C%20high%20quality%2C%20professional%20lighting%2C%20neutral%20background%2C%20detailed%20facial%20features%2C%20friendly%20expression&width=200&height=200&seq=1&orientation=squarish" alt="Emily Johnson" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-1">
+<h1 class="text-3xl font-bold text-white mb-2">Emily Johnson</h1>
+<p class="text-blue-100 text-lg mb-4">Mathematics & Physics Student • University of Technology</p>
+<div class="flex items-center space-x-4">
+<button class="bg-white text-primary px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition">
+<i class="ri-edit-line mr-2"></i>Edit Profile
+</button>
+<button class="bg-blue-700 text-white px-4 py-2 rounded-button font-medium hover:bg-blue-800 transition">
+<i class="ri-share-line mr-2"></i>Share Profile
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Profile Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="stat-card bg-white rounded-lg shadow-sm p-6">
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-4">
+<i class="ri-book-open-line ri-lg"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-800">6</h3>
+<p class="text-sm text-gray-600">Enrolled Courses</p>
+</div>
+</div>
+</div>
+<div class="stat-card bg-white rounded-lg shadow-sm p-6">
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-full mr-4">
+<i class="ri-time-line ri-lg"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-800">156h</h3>
+<p class="text-sm text-gray-600">Total Study Time</p>
+</div>
+</div>
+</div>
+<div class="stat-card bg-white rounded-lg shadow-sm p-6">
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-100 text-orange-600 rounded-full mr-4">
+<i class="ri-trophy-line ri-lg"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-800">24</h3>
+<p class="text-sm text-gray-600">Achievements</p>
+</div>
+</div>
+</div>
+<div class="stat-card bg-white rounded-lg shadow-sm p-6">
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-purple-100 text-purple-600 rounded-full mr-4">
+<i class="ri-star-line ri-lg"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-800">4.8</h3>
+<p class="text-sm text-gray-600">Average Rating</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Profile Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Profile Info -->
+<div class="lg:col-span-2">
+<!-- About Me -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">About Me</h2>
+<p class="text-gray-700 mb-4">I'm a passionate student pursuing advanced studies in mathematics and physics. I love exploring complex mathematical concepts and understanding the fundamental laws that govern our universe. My goal is to become a researcher and contribute to scientific discoveries.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<h3 class="font-medium text-gray-800 mb-2">Education</h3>
+<p class="text-sm text-gray-600">Bachelor of Science in Mathematics</p>
+<p class="text-sm text-gray-600">University of Technology</p>
+<p class="text-sm text-gray-500">2022 - 2026</p>
+</div>
+<div>
+<h3 class="font-medium text-gray-800 mb-2">Interests</h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Calculus</span>
+<span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">Physics</span>
+<span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">Programming</span>
+<span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm">Data Science</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Learning Progress -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Learning Progress</h2>
+<div class="space-y-6">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-medium text-gray-800">Overall Progress</h3>
+<span class="text-sm font-medium text-primary">78%</span>
+</div>
+<div class="w-full h-3 bg-gray-200 rounded-full">
+<div class="h-3 bg-primary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-medium text-gray-800">Learning Streak</h3>
+<span class="text-sm font-medium text-green-600">16 days</span>
+</div>
+<div class="w-full h-3 bg-gray-200 rounded-full">
+<div class="h-3 bg-green-500 rounded-full" style="width: 53%"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-medium text-gray-800">Weekly Goal</h3>
+<span class="text-sm font-medium text-orange-600">18/20 hours</span>
+</div>
+<div class="w-full h-3 bg-gray-200 rounded-full">
+<div class="h-3 bg-orange-500 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Recent Activity -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Recent Activity</h2>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3 mt-1">
+<i class="ri-book-open-line"></i>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-800">Completed lesson: Differential Equations</h4>
+<p class="text-sm text-gray-600">Advanced Mathematics • 2 hours ago</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-green-100 text-green-600 rounded-full mr-3 mt-1">
+<i class="ri-trophy-line"></i>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-800">Earned badge: Math Master</h4>
+<p class="text-sm text-gray-600">Calculus Expert • 1 day ago</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-purple-100 text-purple-600 rounded-full mr-3 mt-1">
+<i class="ri-time-line"></i>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-800">Started lesson: Quantum Mechanics</h4>
+<p class="text-sm text-gray-600">Physics Fundamentals • 3 days ago</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-8 h-8 flex items-center justify-center bg-orange-100 text-orange-600 rounded-full mr-3 mt-1">
+<i class="ri-star-line"></i>
+</div>
+<div class="flex-1">
+<h4 class="font-medium text-gray-800">Achieved perfect score on quiz</h4>
+<p class="text-sm text-gray-600">Programming Basics • 1 week ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Sidebar -->
+<div class="lg:col-span-1">
+<!-- Profile Completion -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Profile Completion</h2>
+<div class="flex items-center justify-center mb-6">
+<div class="relative w-32 h-32">
+<svg class="progress-ring" width="128" height="128">
+<circle class="text-gray-200" stroke="currentColor" stroke-width="8" fill="transparent" r="52" cx="64" cy="64"/>
+<circle class="progress-ring-circle text-primary" stroke="currentColor" stroke-width="8" fill="transparent" r="52" cx="64" cy="64" stroke-dashoffset="31"/>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-2xl font-bold text-gray-800">89%</span>
+<span class="text-sm text-gray-500">Complete</span>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Basic Information</span>
+<span class="text-sm font-medium text-green-600">✓ Complete</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Education</span>
+<span class="text-sm font-medium text-green-600">✓ Complete</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Interests</span>
+<span class="text-sm font-medium text-green-600">✓ Complete</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Profile Picture</span>
+<span class="text-sm font-medium text-green-600">✓ Complete</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-gray-600">Social Links</span>
+<span class="text-sm font-medium text-orange-600">Incomplete</span>
+</div>
+</div>
+<a href="settings.html" class="w-full bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-blue-600 transition mt-4 inline-block text-center">
+Complete Profile
+</a>
+</div>
+
+<!-- Contact Information -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Contact Information</h2>
+<div class="space-y-4">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-100 text-primary rounded-full mr-3">
+<i class="ri-mail-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Email</h4>
+<p class="text-sm text-gray-600">emily.johnson@email.com</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-green-100 text-green-600 rounded-full mr-3">
+<i class="ri-phone-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Phone</h4>
+<p class="text-sm text-gray-600">+1 (555) 123-4567</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-purple-100 text-purple-600 rounded-full mr-3">
+<i class="ri-map-pin-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Location</h4>
+<p class="text-sm text-gray-600">San Francisco, CA</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center bg-orange-100 text-orange-600 rounded-full mr-3">
+<i class="ri-calendar-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Joined</h4>
+<p class="text-sm text-gray-600">January 2024</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Skills & Expertise -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6 mb-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Skills & Expertise</h2>
+<div class="space-y-4">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Mathematics</span>
+<span class="text-sm font-medium text-gray-800">95%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-blue-500 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Physics</span>
+<span class="text-sm font-medium text-gray-800">88%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-green-500 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Programming</span>
+<span class="text-sm font-medium text-gray-800">82%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-purple-500 rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-gray-700">Data Science</span>
+<span class="text-sm font-medium text-gray-800">75%</span>
+</div>
+<div class="w-full h-2 bg-gray-200 rounded-full">
+<div class="h-2 bg-orange-500 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Quick Actions -->
+<div class="profile-card bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-xl font-semibold text-gray-800 mb-6">Quick Actions</h2>
+<div class="space-y-3">
+<a href="#" class="w-full bg-blue-50 text-primary py-3 px-4 rounded-button text-sm font-medium hover:bg-blue-100 transition text-left inline-block">
+<i class="ri-download-line mr-3"></i>Download Certificate
+</a>
+<a href="#" class="w-full bg-green-50 text-green-600 py-3 px-4 rounded-button text-sm font-medium hover:bg-green-100 transition text-left inline-block">
+<i class="ri-share-line mr-3"></i>Share Profile
+</a>
+<a href="settings.html" class="w-full bg-purple-50 text-purple-600 py-3 px-4 rounded-button text-sm font-medium hover:bg-purple-100 transition text-left inline-block">
+<i class="ri-edit-line mr-3"></i>Edit Profile
+</a>
+<a href="settings.html" class="w-full bg-orange-50 text-orange-600 py-3 px-4 rounded-button text-sm font-medium hover:bg-orange-100 transition text-left inline-block">
+<i class="ri-settings-line mr-3"></i>Account Settings
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+<!-- AI Assistant Button -->
+<div class="fixed bottom-6 right-6 z-50">
+<button id="ai-assistant-btn" class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-600 transition">
+<i class="ri-robot-line ri-lg"></i>
+</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleIcon = document.getElementById('theme-toggle-icon');
+const body = document.body;
+
+function setTheme(isDark) {
+if (isDark) {
+body.classList.add('dark');
+themeToggleIcon.classList.remove('ri-moon-line');
+themeToggleIcon.classList.add('ri-sun-line');
+localStorage.setItem('theme', 'dark');
+} else {
+body.classList.remove('dark');
+themeToggleIcon.classList.remove('ri-sun-line');
+themeToggleIcon.classList.add('ri-moon-line');
+localStorage.setItem('theme', 'light');
+}
+}
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+setTheme(true);
+}
+
+themeToggle.addEventListener('click', function() {
+const isDark = body.classList.contains('dark');
+setTheme(!isDark);
+});
+
+// Profile completion functionality
+const completeProfileBtn = document.querySelector('button:contains("Complete Profile")');
+if (completeProfileBtn) {
+completeProfileBtn.addEventListener('click', function() {
+// Add profile completion functionality here
+alert('Profile completion feature coming soon!');
+});
+}
+
+// AI Assistant functionality
+const aiAssistantBtn = document.getElementById('ai-assistant-btn');
+aiAssistantBtn.addEventListener('click', function() {
+// Add AI assistant functionality here
+alert('AI Assistant feature coming soon!');
+});
+});
+</script>
+</body>
+</html> 
