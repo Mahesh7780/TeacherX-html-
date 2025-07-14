@@ -4,6 +4,12 @@ A responsive full-stack AI-powered education platform designed for desktop and m
 
 ### Home Page
 ![Home Page](img/TeacherX1.PNG)
+
+### Studying Page
+![studying page](img/TeacherX2.PNG)
+
+### Schedule Page
+![schedule page](img/TeacherX3.PNG)
 ## ✨ Features
 
 ### 🧠 AI-Powered Learning
